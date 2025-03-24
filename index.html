@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analyzer - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2><i class="fas fa-chart-bar"></i> Dashboard</h2>
+            <ul>
+                <li class="active"><i class="fas fa-upload"></i> Upload</li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1><i class="fas fa-file-alt"></i> Resume Analyzer</h1>
+            <p>Upload multiple resumes to analyze and rank them by job category</p>
+            
+            <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="showLoading()">
+                <div class="file-upload" id="drop-area">
+                    <label for="resumes" id="upload-label">
+                        <i class="fas fa-cloud-upload-alt"></i> Drag & Drop or Click to Upload (PDF)
+                    </label>
+                    <input type="file" name="resumes" accept=".pdf" multiple required>
+                    <script>
+                        document.getElementById("resumeInput").addEventListener("change", function () {
+                            let fileCount = this.files.length;
+                            let fileCountText = fileCount > 0 ? `${fileCount} file(s) selected` : "No files selected";
+                            document.getElementById("file-count").textContent = fileCountText;
+                        });
+                    </script>                    
+                </div>
+                
+                <div class="dropdown-container">
+                    <label for="job_category"><i class="fas fa-briefcase"></i> Select Job Category</label>
+                    <select id="job_category" name="job_category" required>
+                        <option value="" disabled selected>Choose a category</option>
+                        {% for category in job_categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-btn"><i class="fas fa-search"></i> Analyze Resumes</button>
+                <div id="loading" class="loading" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i> Processing...
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        const dropArea = document.getElementById('drop-area');
+        const input = document.getElementById('resumes');
+        const fileCountDisplay = document.getElementById('file-count');
+
+        dropArea.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropArea.classList.add('active');
+        });
+
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.classList.remove('active');
+        });
+
+        dropArea.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropArea.classList.remove('active');
+            input.files = event.dataTransfer.files;
+            updateFileCount();
+        });
+
+        input.addEventListener('change', updateFileCount);
+        function updateFileCount() {
+            const fileCount = input.files.length;
+            fileCountDisplay.textContent = fileCount === 0 ? 'No files selected' :
+                (fileCount === 1 ? '1 file selected: ' + input.files[0].name :
+                fileCount + ' files selected');
+        }
+
+        function showLoading() {
+            document.getElementById('loading').style.display = "block";
+        }
+    </script>
+</body>
+</html>

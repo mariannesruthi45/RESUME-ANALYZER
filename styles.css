@@ -1,0 +1,154 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #121212;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Split Screen Layout */
+.split-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Left Section (Title & Upload More Button) */
+.left-section {
+    width: 40%;
+    background: #1e1e1e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+    border-right: 2px solid #FFD700;
+}
+
+.left-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #FFD700;
+    text-transform: uppercase;
+}
+
+.left-section h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #e0e0e0;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #b3b3b3;
+    margin-bottom: 20px;
+}
+
+/* Right Section (Table) */
+.right-section {
+    width: 60%;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    animation: glowBorder 1.5s infinite alternate;
+}
+
+/* Pulsing Glowing Effect */
+@keyframes glowBorder {
+    from {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+table th {
+    font-weight: 600;
+    background: #333;
+    color: #FFD700;
+    text-transform: uppercase;
+}
+
+table td {
+    color: #ddd;
+}
+
+/* LinkedIn Button */
+.linkedin-button {
+    display: inline-block;
+    padding: 6px 12px;
+    color: #fff;
+    background: #0e76a8;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    transition: background 0.3s ease-in-out;
+}
+
+.linkedin-button:hover {
+    background: #005582;
+}
+
+/* Upload More Button */
+.upload-more {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #FFD700 0%, #b8860b 100%);
+    color: #121212;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+}
+
+.upload-more:hover {
+    background: linear-gradient(135deg, #b8860b 0%, #FFD700 100%);
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 800px) {
+    .split-container {
+        flex-direction: column;
+    }
+
+    .left-section {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #FFD700;
+    }
+
+    .right-section {
+        width: 100%;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+}

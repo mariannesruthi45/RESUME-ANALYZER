@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="split-container">
+        <div class="left-section">
+            <h1>Resume Analysis</h1>
+            <h2>Results for <span class="highlight">{{ job_category }}</span></h2>
+            <p class="subtitle">Evaluating resumes based on <strong>AI predictions</strong> and <strong>quality analysis</strong>.</p>
+            <a href="/" class="upload-more">Upload More Resumes</a>
+        </div>
+
+        <div class="right-section">
+            {% if resumes %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Resume</th>
+                        <th>Name</th>
+                        <th>LinkedIn</th>
+                        <th>Email</th>
+                        <th>Predicted Category</th>
+                        <th>Resume Quality</th>
+                        <th>Keyword Match (%)</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for resume in resumes %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ resume[0] }}</td>
+                        <td>{{ resume[3] if resume[3] else '<span class="text-muted">N/A</span>' | safe }}</td>
+                        <td>
+                            {% if resume[4] and resume[4] != "N/A" %}
+                                <a href="{{ resume[4] }}" target="_blank" class="linkedin-button">View Profile</a>
+                            {% else %}
+                                <span class="text-muted">No Profile Found</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ resume[5] if resume[5] else '<span class="text-muted">N/A</span>' | safe }}</td>
+                        <td>{{ resume[1] }}</td>
+                        <td>{{ resume[2] }}</td>
+                        <td>{{ resume[6] }}%</td>
+                        <td>
+                            {% set match_score = resume[6] %}
+                            {% set quality = resume[2] %}
+
+                            {% if quality == "Excellent" and match_score >= 80 %}
+                                <span aria-label="5 stars">⭐⭐⭐⭐⭐</span>
+                            {% elif quality == "Excellent" and match_score >= 50 %}
+                                <span aria-label="4 stars">⭐⭐⭐⭐</span>
+                            {% elif quality == "Excellent" and match_score >= 30 %}
+                                <span aria-label="3 stars">⭐⭐⭐</span>
+                            {% elif quality == "Good" and match_score >= 70 %}
+                                <span aria-label="4 stars">⭐⭐⭐⭐</span>
+                            {% elif quality == "Good" and match_score >= 30 %}
+                                <span aria-label="3 stars">⭐⭐⭐</span>
+                            {% elif quality == "Good" %}
+                                <span aria-label="2 stars">⭐⭐</span>
+                            {% elif quality == "Bad" and match_score >= 50 %}
+                                <span aria-label="3 stars">⭐⭐⭐</span>
+                            {% elif quality == "Bad" and match_score >= 30 %}
+                                <span aria-label="2 stars">⭐⭐</span>
+                            {% else %}
+                                <span aria-label="1 star">⭐</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="no-results">No resumes matched the selected job category.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+

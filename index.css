@@ -1,0 +1,150 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #121212;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Dashboard Layout */
+.dashboard-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #1b1b1b;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar h2 {
+    font-size: 1.8rem;
+    color: gold;
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.sidebar ul li:hover, .sidebar ul .active {
+    background: gold;
+    color: black;
+    border-radius: 10px;
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 50px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: gold;
+}
+
+/* Animated File Upload */
+.file-upload {
+    border: 2px dashed gold;
+    padding: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    animation: glow-pulse 2s infinite;
+}
+
+@keyframes glow-pulse {
+    0% { box-shadow: 0 0 10px gold; }
+    50% { box-shadow: 0 0 20px gold; }
+    100% { box-shadow: 0 0 10px gold; }
+}
+
+.file-upload:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.file-upload label {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: gold;
+}
+
+.file-upload i {
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+/* Dropdown */
+.dropdown-container {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    background: black;
+    color: gold;
+    font-size: 1rem;
+    border: 2px solid gold;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Submit Button */
+button {
+    background: gold;
+    color: black;
+    font-size: 1.2rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #cfa500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        text-align: center;
+    }
+}
